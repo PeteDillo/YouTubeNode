@@ -1,0 +1,29 @@
+{
+  "name": "youtubenode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeteDillo/YouTubeNode.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PeteDillo/YouTubeNode/issues"
+  },
+  "homepage": "https://github.com/PeteDillo/YouTubeNode#readme",
+  "dependencies": {
+    "config": "^3.3.7",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "joi": "^17.6.0",
+    "mongoose": "^6.2.11",
+    "nodemon": "^2.0.15"
+  }
+}
