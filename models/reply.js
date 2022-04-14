@@ -1,29 +1,24 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
 
-const commentSchema = new mongoose.Schema({
+const repliesSchema = new mongoose.Schema({
   name: { type: String, required: true, minlength: 2, maxlength: 255 },
   body: { type: String, required: true, minlength: 2 },
-  like: { type: Boolean, required: true },
-  dislike: { type: Boolean, required: true },
   dateAdded: { type: Date, default: Date.now() },
-  replies: { type: [repliesSchema], default: [] },
 });
 
-function validateComment(comment) {
+function validateReply(comment) {
   const schema = Joi.object({
     name: Joi.string().min(2).max(255).required(),
     body: Joi.string().required(),
-    like: Joi.boolean().required(),
-    dislike: Joi.boolean().required(),
   });
   return schema.validate(comment);
 }
 
-const Comment = mongoose.model("Comment", commentSchema);
+const Reply = mongoose.model("Reply", repliesSchema);
 
 module.exports = {
-  Comment,
-  validateComment,
-  commentSchema,
+  Reply,
+  validateReply,
+  repliesSchema,
 };
