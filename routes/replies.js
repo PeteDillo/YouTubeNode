@@ -1,12 +1,12 @@
 const express = require("express");
-const { User, validateUser } = require("../models/user");
-const { Product, validateProduct } = require("../models/product");
+const { Comment, validateComment } = require("../models/comment");
+const { Reply, validateReply } = require("../models/reply");
 const { send } = require("express/lib/response");
 const router = express.Router();
 
 
-//POST a user
-//http://localhost:3007/api/users
+//POST a reply
+//http://localhost:3007/api/replies
 
 router.post("/", async (req,res)=>{
     try {
