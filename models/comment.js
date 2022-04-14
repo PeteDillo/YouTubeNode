@@ -7,7 +7,7 @@ const commentSchema = new mongoose.Schema({
   like: { type: Boolean, required: true },
   dislike: { type: Boolean, required: true },
   dateAdded: { type: Date, default: Date.now() },
-  replies: { type: [repliesSchema], default: [] },
+  replies: [repliesSchema],
 });
 
 function validateComment(comment) {
