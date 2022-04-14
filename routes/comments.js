@@ -1,4 +1,5 @@
 const {Comment, validateComment} = require("../models/Comment");
+const {Reply, validateReply} = require("../models/reply");
 const express = require("express");
 const {append} = require("express/lib/response")
 const router = express.Router();
