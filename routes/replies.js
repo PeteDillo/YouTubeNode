@@ -1,5 +1,4 @@
 const express = require("express");
-const { Comment, validateComment } = require("../models/comment");
 const { Reply, validateReply } = require("../models/reply");
 const { send } = require("express/lib/response");
 const router = express.Router();
@@ -10,49 +9,31 @@ const router = express.Router();
 
 router.post("/", async (req,res)=>{
     try {
-        let { error } = validateUser(req.body);
-        if (error) return res.status(400).send(`Body for user not valid! ${error}`);
+        let { error } = validateReply(req.body);
+        if (error) return res.status(400).send(`Body for reply not valid! ${error}`);
 
-        let newUser = await new User(req.body);
-        await newUser.save();
-        return res.status(201).send(newUser);
+        let newReply = await new Reply(req.body);
+        await newReply.save();
+        return res.status(201).send(newReply);
 
     } catch (error) {
         return res.status(500).send(`Internal Server Error: ${error}`);
     };
 });
 
-//GET all users
-//http://localhost:3007/api/users
-
+//GET all replies
+//http://localhost:3007/api/replies
 router.get("/", async (req,res)=>{
     try {
-        let users = await User.find();
-        if (!users) return res.status(400).send(`No users in the collection!`);
-        return res.send(users);
+        let replies = await Reply.find();
+        if (!replies) return res.status(400).send(`No replies in the collection!`);
+        return res.send(replies);
     } catch (error) {
         return res.status(500).send(`Internal Server Error: ${error}`);
     }
 });
 
-//POST a product to a shopping cart
-//http://localhost:3007/api/users/:userId/shoppingcart/:productId
-router.post("/:userId/shoppingcart/:productId", async(req,res)=>{
-    try {
-        let user = await User.findById(req.params.userId);
-        if (!user) return res.status(400).send(`No user with ID ${req.params.usersId}!`);
-
-        let product = await Product.findById(req.params.productId);
-        if (!product) return res.status(400).send(`Product with ID ${req.params.productId} does not exist!`);
-
-        user.shoppingCart.push(product);
-        await user.save();
-        return res.send(user.shoppingCart);
-    } catch (error) {
-        return res.status(500).send(`Internal Server Error: ${error}`);
-    }
-})
-
+//TODO: move these if needed to comments.js
 //PUT an existing product in shopping cart
 //http://localhost:3007/api/users/:userId/shoppingcart/:productId
 router.put("/:userId/shoppingcart/:productId", async(req,res)=>{

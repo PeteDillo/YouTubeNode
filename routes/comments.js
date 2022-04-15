@@ -77,5 +77,21 @@ router.post("/", async (req, res) => {
     }
 });
 
+//POST a reply to a comment
+//http://localhost:3007/api/comments/:commentId/replies/:replyId
+router.post("/:commentId/replies/:replyId", async(req,res)=>{
+    try {
+        let comment = await Comment.findById(req.params.commentId);
+        if (!comment) return res.status(400).send(`No comment with ID ${req.params.commentId}!`);
 
+        let reply = await Reply.findById(req.params.replyId);
+        if (!reply) return res.status(400).send(`Reply with ID ${req.params.replyId} does not exist!`);
+
+        comment.replies.push(reply);
+        await comment.save();
+        return res.send(comment.replies);
+    } catch (error) {
+        return res.status(500).send(`Internal Server Error: ${error}`);
+    }
+})
 module.exports = router;

@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 
 const comments = require("./routes/comments");
-// const replies = require("./routes/replies.js");
+const replies = require("./routes/replies");
 
 connectDb();
 
@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/comments', comments)
-// app.use('/api/replies',  replies);
+app.use('/api/replies',  replies);
 
 const PORT = process.env.PORT || 5000;
 
