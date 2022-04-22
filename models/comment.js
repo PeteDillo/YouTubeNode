@@ -3,6 +3,7 @@ const Joi = require("joi");
 const { repliesSchema } = require("./reply");
 
 const commentSchema = new mongoose.Schema({
+  videoId: { type: String, required: true},
   name: { type: String, required: true, minlength: 2, maxlength: 255 },
   body: { type: String, required: true, minlength: 2 },
   like: { type: Boolean, required: true },
@@ -13,6 +14,7 @@ const commentSchema = new mongoose.Schema({
 
 function validateComment(comment) {
   const schema = Joi.object({
+    videoId: Joi.string().required(),
     name: Joi.string().min(2).max(255).required(),
     body: Joi.string().required(),
     like: Joi.boolean().required(),
