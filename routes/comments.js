@@ -28,6 +28,18 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+//GET comment by videoId
+//http://localhost:3007/api/comments/:commentId/
+router.get("/:commentId/:videoId", async (req, res) => {
+    try {
+        let comment = await Comment.find({videoId: req.params.videoId});
+        if (!Comment) return res.status(400).send(`Video with id "${req.params.id}" does not exist!`);
+        return res.send(comment);
+    } catch (error) {
+        return res.status(500).send(`Internal Server Error: ${error}`);
+    }
+})
+
 //PUT update a Comment
 router.put("/:id", async (req, res) => {
     try {
